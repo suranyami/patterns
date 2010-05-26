@@ -1,0 +1,5 @@
+h1. Patterns
+
+Experiments with repeating patterns in Raphael.
+
+Ultimately, I'd like to work towards stuff like "this":http://www.cgl.uwaterloo.ca/~csk/phd/
