@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Patterns</title>
+    <script src="javascripts/raphael.js" type="text/javascript" charset="utf-8"></script>
+    <script src="javascripts/patterns.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css" media="screen">
+      #notepad {
+        width: 1000px;
+        height: 800px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="notepad"></div>
+    <script type="text/javascript" charset="utf-8">
+      function wave(ang) {
+        var ang_radians = ang * Math.PI / 180.0;
+        var result = Math.sin(ang_radians);
+        return result;
+      }
+    
+      var colors = ["red", "green"];
+      var paper = Raphael("notepad", 1000, 800);
+      var p = new Patterns(paper);
+      for (var a = 100; a > 0; a--) {
+        var i = a % 2;
+        var c = colors[i];
+        console.log(c);
+        p.polygon(200, 100, 6, a * 2, wave(a * 10) * 10, a / 10, c);
+      }
+      
+    </script>
+  </body>
+</html>

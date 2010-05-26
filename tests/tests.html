@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Patterns Tests</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <script src="../javascripts/raphael.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../javascripts/patterns.js" type="text/javascript" charset="utf-8"></script>
+  <script src="prototype.js" type="text/javascript" charset="utf-8"></script>
+  <script src="unittest.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="test.css" type="text/css" />
+</head>
+<body>
+  <h1>Patterns Tests</h1>
+<!-- Log output -->
+<div id="testlog"> </div>
+
+<div id="sample_node"></div>
+
+<!-- Tests follow -->
+<script type="text/javascript" language="javascript" charset="utf-8">
+// <![CDATA[
+
+  new Test.Unit.Runner({
+    
+    setup: function() {
+      this.p = new Patterns("sample_node");
+    },
+    
+    teardown: function() {
+    },
+
+    test_moveTo: function() { with(this) {
+      this.p.moveTo(10, 10);
+      assertEqual("M10 10", this.p.path);
+    }},
+    
+    test_moveToRel: function() { with(this) {
+      this.p.isAbsolute = false;
+      this.p.moveTo(10, 10);
+      assertEqual("m10 10", this.p.path);
+    }},
+    
+    
+    test_lineTo: function() { with(this) {
+      this.p.lineTo(20, 20);
+      assertEqual("L20 20", this.p.path);
+      this.p.isAbsolute = false;
+      this.p.path = '';
+      this.p.lineTo(20, 20);
+      assertEqual("l20 20", this.p.path);
+    }},
+    
+    test_move_line: function() { with(this) {
+      this.p.moveTo(10, 10);
+      this.p.lineTo(20, 20);
+      assertEqual("M10 10L20 20", this.p.path);
+    }},
+
+    test_coords: function() { with(this) {
+      assertEqual(this.p.coords(30, 30), "30 30");
+    }}
+  });
+// ]]>
+</script>
+
+<!-- Test elements will be inserted after this -->
+
+</body>
+</html>
+
