@@ -2,19 +2,26 @@ class Wave
   DEFAULT_LINE_WIDTH = 2.0
   DEFAULT_STROKE_COLOR = "black"
   
-  constructor: (@elem, step) ->
+  constructor: (@elem) ->
+    @direction = 0.1
+    @step = 5
+  
+  draw: () ->
+    console.log @step
     @elem.clear()
-    for origin in [-100..800] by step
+    for origin in [-100..800] by @step
       @path = "M 0,#{origin}"
-      for horiz in [0..1000] by 100
+      for horiz in [0..1200] by 100
         @path += "q 50,-50 100,0 q 50,50 100,0"
       p = @elem.path(@path)
       p.attr "stroke-width": DEFAULT_LINE_WIDTH
       p.attr stroke: DEFAULT_STROKE_COLOR
+      
+    @direction = -@direction if @step > 10 or @step < 3
+    @step += @direction
     
-    setInterval((-> new Wave(paper, step + 1)), 200)
     
 $(document).ready ->
   paper = Raphael("notepad", 1000, 800)
-  setInterval((-> new Wave(paper, step)), 200)
-  
+  wave = new Wave(paper)
+  setInterval((-> wave.draw()), 100)
